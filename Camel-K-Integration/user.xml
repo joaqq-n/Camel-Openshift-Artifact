@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- camel-k: language=xml -->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://camel.apache.org/schema/spring"
+        xsi:schemaLocation="
+            http://camel.apache.org/schema/spring
+            https://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<!-- Write your routes here, for example: -->
+    <route id="xml">
+        <from uri="platform-http:/user"/>
+        <removeHeaders pattern="*"/>
+        <to uri="https://random-data-api.com/api/v2/users?response_type=xml"/>
+                <unmarshal>
+            <jacksonXml/>
+        </unmarshal>
+        <marshal>
+            <json/>
+        </marshal>
+
+        <log message="${body}"/>
+    </route>
+</routes>
+
+<!-- Esta integracion usa la ruta user para parsear datos de  usuarios desde la uri random-data-api que vienen en XML a JSON -->
