@@ -1,6 +1,6 @@
 schemaVersion: 2.2.0
 metadata:
-  name: devsandbox-camel-labs
+  name: joaqq-universal-sandbox
 components:
   - name: tools
     container:
@@ -28,7 +28,7 @@ components:
         - name: THREESCALE_WILDCARD_DOMAIN
           value: local.localdomain
         - name: OPENSHIFT_VERSION
-          value: '4'
+          value: "4"
         - name: WALKTHROUGH_LOCATIONS
           value: >-
             https://github.com/RedHat-Middleware-Workshops/devsandbox-camel-sb-simple?walkthroughsFolder=/docs/labs
