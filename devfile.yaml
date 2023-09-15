@@ -1,0 +1,81 @@
+schemaVersion: 2.2.0
+metadata:
+  name: devsandbox-camel-labs
+components:
+  - name: tools
+    container:
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
+      memoryLimit: 3Gi
+      endpoints:
+        - exposure: none
+          name: debug
+          protocol: tcp
+          targetPort: 5005
+        - exposure: public
+          name: 8080-tcp
+          protocol: http
+          targetPort: 8080
+      volumeMounts:
+        - name: m2
+          path: /home/user/.m2
+
+  - name: webapp
+    container:
+      image: quay.io/redhatintegration/tutorial-web-app:latest
+      env:
+        - name: NODE_ENV
+          value: production
+        - name: THREESCALE_WILDCARD_DOMAIN
+          value: local.localdomain
+        - name: OPENSHIFT_VERSION
+          value: '4'
+        - name: WALKTHROUGH_LOCATIONS
+          value: >-
+            https://github.com/RedHat-Middleware-Workshops/devsandbox-camel-sb-simple?walkthroughsFolder=/docs/labs
+      endpoints:
+        - name: tutorial
+          exposure: public
+          targetPort: 5001
+          protocol: https
+          secure: true
+      memoryLimit: 512Mi
+      mountSources: true
+      volumeMounts:
+        - name: tutorial-storage
+          path: /opt/user-walkthroughs
+
+  - name: m2
+    volume:
+      size: 1G
+
+  - name: tutorial-storage
+    volume:
+      size: 256Mi
+
+commands:
+  - id: run-stub
+    exec:
+      commandLine: JAVA_HOME=$JAVA_HOME_11 mvn -Dspring-boot.run.profiles=dev -s configuration/settings.xml
+      component: tools
+      workingDir: "${PROJECT_SOURCE}/stubs/end1"
+
+  - id: run-main
+    exec:
+      commandLine: JAVA_HOME=$JAVA_HOME_11 mvn -Dspring-boot.run.profiles=dev -s configuration/settings.xml
+      component: tools
+      workingDir: "${PROJECT_SOURCE}/level1simple"
+
+  - id: send-request
+    exec:
+      commandLine: >-
+        curl -H 'content-type: application/json' -d '{"id":"123"}' http://localhost:8080/camel/subscriber/details
+      component: tools
+      workingDir: "${PROJECT_SOURCE}"
+
+  - id: debug-services
+    exec:
+      commandLine: |
+        JAVA_HOME=$JAVA_HOME_8 mvn spring-boot:run -DskipTests \
+        -Drun.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005"
+      component: tools
+      workingDir: "${PROJECT_SOURCE}"
