@@ -4,7 +4,7 @@ metadata:
 components:
   - name: tools
     container:
-      image: quay.io/devfile/universal-developer-image:ubi9-latest
+      image: registry.redhat.io/ubi9/openjdk-17
       memoryLimit: 3Gi
       endpoints:
         - exposure: none
