@@ -10,7 +10,7 @@ components:
       endpoints:
         - name: java-endpoint
           exposure: public
-          targetPort: 5001
+          targetPort: 5005
           protocol: https
           secure: true
       memoryLimit: 512Mi
