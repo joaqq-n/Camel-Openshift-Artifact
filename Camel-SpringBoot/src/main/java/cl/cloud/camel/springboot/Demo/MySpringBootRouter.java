@@ -1,4 +1,5 @@
-package cl.cloud.camel.springboot;
+package cl.cloud.camel.springboot.hello.world;
+
 
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;

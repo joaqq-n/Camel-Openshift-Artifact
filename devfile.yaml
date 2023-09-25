@@ -4,7 +4,9 @@ metadata:
 components:
   - name: tools
     container:
-      image: registry.redhat.io/ubi9/openjdk-17
+      image: registry.redhat.io/redhat-openjdk-18/openjdk18-openshift
+      imagePullSecrets:
+        - name: registry-secret
       memoryLimit: 3Gi
       endpoints:
         - exposure: none
@@ -29,9 +31,6 @@ components:
           value: local.localdomain
         - name: OPENSHIFT_VERSION
           value: "4"
-        - name: WALKTHROUGH_LOCATIONS
-          value: >-
-            https://github.com/RedHat-Middleware-Workshops/devsandbox-camel-sb-simple?walkthroughsFolder=/docs/labs
       endpoints:
         - name: tutorial
           exposure: public

@@ -1,4 +1,4 @@
-package cl.cloud.camel.springboot;
+package cl.cloud.camel.springboot.hello.world;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
