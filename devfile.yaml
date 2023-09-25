@@ -15,9 +15,9 @@ components:
           secure: true
       memoryLimit: 512Mi
 
-      # volumeMounts:
-      #   - name: m2
-      #     path: /home/user/.m2
+      volumeMounts:
+        - name: m2
+          path: /home/user/.m2
 
   - name: webapp
     container:
