@@ -1,12 +1,12 @@
 schemaVersion: 2.2.0
 metadata:
   name: joaqq-universal-sandbox
+  imagePullSecrets:
+    - name: registry-secret
 components:
   - name: tools
     container:
       image: registry.redhat.io/redhat-openjdk-18/openjdk18-openshift
-      imagePullSecrets:
-        - name: registry-secret
       memoryLimit: 3Gi
       endpoints:
         - exposure: none
