@@ -4,7 +4,7 @@ metadata:
   imagePullSecrets:
     - name: registry-secret
 components:
-  - name: tools
+  - name: javapp
     container:
       image: registry.redhat.io/redhat-openjdk-18/openjdk18-openshift
       endpoints:
@@ -16,6 +16,7 @@ components:
           name: 8080-tcp
           protocol: http
           targetPort: 8080
+      memoryLimit: 512Mi
       # volumeMounts:
       #   - name: m2
       #     path: /home/user/.m2
