@@ -6,7 +6,7 @@ metadata:
 components:
   - name: javapp
     container:
-      image: registry.redhat.io/redhat-openjdk-18/openjdk18-openshift
+      image: registry.redhat.io/ubi9/openjdk-17-runtime
       endpoints:
         - name: java-endpoint
           exposure: public
