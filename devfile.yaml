@@ -16,9 +16,9 @@ components:
           name: 8080-tcp
           protocol: http
           targetPort: 8080
-      volumeMounts:
-        - name: m2
-          path: /home/user/.m2
+      # volumeMounts:
+      #   - name: m2
+      #     path: /home/user/.m2
 
   - name: webapp
     container:
