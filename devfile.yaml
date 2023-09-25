@@ -8,15 +8,13 @@ components:
     container:
       image: registry.redhat.io/redhat-openjdk-18/openjdk18-openshift
       endpoints:
-        - exposure: none
-          name: debug
-          protocol: tcp
-          targetPort: 5005
-        - exposure: public
-          name: 8080-tcp
-          protocol: http
-          targetPort: 8080
+        - name: tutorial
+          exposure: public
+          targetPort: 5001
+          protocol: https
+          secure: true
       memoryLimit: 512Mi
+
       # volumeMounts:
       #   - name: m2
       #     path: /home/user/.m2
