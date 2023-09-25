@@ -8,7 +8,7 @@ components:
     container:
       image: registry.redhat.io/redhat-openjdk-18/openjdk18-openshift
       endpoints:
-        - name: tutorial
+        - name: java-endpoint
           exposure: public
           targetPort: 5001
           protocol: https
